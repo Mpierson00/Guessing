@@ -1,7 +1,6 @@
 var words = ['local', 'attributes', 'intervals', 'append', 'objects'];
 var selectedWord = '';
 var timeLeft = 120;
-var timerID;
 var wordDisplay = document.getElementById('wordToGuess');
 var alphabetDisplay = document.getElementById('alphabet');
 var timerDisplay = document.getElementById('timer');
@@ -13,18 +12,21 @@ function initGame() {
     timerDisplay.textContent = timeLeft;
     wordDisplay.innerHTML = '';
     alphabetDisplay.innerHTML = '';
+    startTimer();
+    displayWord();
     generateAlphabetButtons();
 }
 
 function startTimer() {
-    clearInterval(timerID);
-    timerID = setInterval(() => {
+   var timerID = setInterval(function() {
         timeLeft--;
         timerDisplay.textContent = timeLeft;
+
         if (timeLeft === 0) {
             clearInterval(timerID);
             alert('time\'s up! You lose');
-            initGame();
         }
     }, 1000);
 }
+
+startGameButton.addEventListener('click', initGame);
